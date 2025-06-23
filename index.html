@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Troll</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f1f1f1;
+      font-family: Arial, sans-serif;
+    }
+    .calculator {
+      border: 1px solid #ccc;
+      border-radius: 16px;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .display {
+      width: 100%;
+      height: 60px;
+      font-size: 2rem;
+      text-align: right;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      grid-gap: 10px;
+      justify-content: center;
+    }
+    button {
+      font-size: 1.5rem;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #e0e0e0;
+    }
+    button:active {
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="display" id="display" disabled />
+    <div class="buttons">
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button onclick="press('/')">/</button><button onclick="press('4')">4</button>
+  <button onclick="press('5')">5</button>
+  <button onclick="press('6')">6</button>
+  <button onclick="press('*')">*</button>
+
+  <button onclick="press('1')">1</button>
+  <button onclick="press('2')">2</button>
+  <button onclick="press('3')">3</button>
+  <button onclick="press('-')">-</button>
+
+  <button onclick="press('0')">0</button>
+  <button onclick="press('.')">.</button>
+  <button onclick="calculate()">=</button>
+  <button onclick="press('+')">+</button>
+
+  <button onclick="clearDisplay()" style="grid-column: span 4; background: #ff9999;">C</button>
+</div>
+
+  </div>  <script>
+    let display = document.getElementById('display');
+    let isEsperta = false;
+
+    function press(val) {
+      display.value += val;
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function calculate() {
+      const expression = display.value;
+      if (expression === '2013') {
+        isEsperta = true;
+        display.value = 'Modo esperto ativado';
+        return;
+      }
+      if (expression === '1995') {
+        isEsperta = false;
+        display.value = 'Modo burro ativado';
+        return;
+      }
+
+      try {
+        let result;
+        if (isEsperta) {
+          result = eval(expression);
+        } else {
+          const respostasTroll = [
+            '42', 'sei lá', 'talvez sim', 'talvez não', 'infinito', '0', '999999', 'tenta de novo'
+          ];
+          result = respostasTroll[Math.floor(Math.random() * respostasTroll.length)];
+        }
+        display.value = result;
+      } catch {
+        display.value = 'Erro';
+      }
+    }
+  </script></body>
+</html>
